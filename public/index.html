@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>请上传您的文件</title>
+</head>
+<body>
+<form action="" enctype="multipart/form-data" method="post">
+    <input type="file" name="upload" multiple="multiple" id="file">
+    <input type="submit" value="Upload file" id="btn"/>
+</form>
+</body>
+<script>
+    var btn = document.querySelector('#btn')
+    var input = document.querySelector('#file')
+    btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        var file = input.files[0]
+        var formData = new FormData()
+        formData.append('upload', file)
+        formData.append('name', 'tony')
+        var xhr = new XMLHttpRequest()
+        xhr.open('post', '/upload')
+        xhr.send(formData)
+        xhr.onload = (e) => {
+            if (e.currentTarget.status === 200) {
+                alert('上传成功')
+            }
+        }
+    })
+</script>
+</html>
